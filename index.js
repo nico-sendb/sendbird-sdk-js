@@ -1,29 +1,33 @@
 
 /**
- * MY INFO
+ * MY SENDBIRD INFO
  */
-// const APP_ID = 'F96C99B3-6ED0-4AB2-8A0E-AF98C94B1EC4';
-// const USER_ID = 'e9710233-934a-4e33-be6e-fafe572197bf';
-// const ACCESS_TOKEN = '81899cc13bcd9077d0322b320d7a2089055f314f';
-
-// WALTER's
-const APP_ID = 'D1CB1742-A4A3-44B9-9E7F-126D14BAB34B';
-const USER_ID = 'test1';
-const ACCESS_TOKEN = null;
+const APP_ID = 'WRITE HERE YOUR APP ID FROM SENDBIRD';
+const USER_ID = 'ENTER ONE OF YOUR USER ID HERE';
+const ACCESS_TOKEN = null; // Use this if your user has Access Token (check this from your Sendbird Dashboard)
 
 /**
- * More variables
+ * Unique hanlder for listener (can be any string you like)
  */
 const UNIQUE_HANDLER_ID = '1234567890';
+
+/**
+ *  Where group channels will be listed in your HTML
+ */
 const group_channels_list = document.getElementById('group_channels_list');
+
+/**
+ *  Where your messages will be listed in your HTML
+ */
 const message_list = document.getElementById('message_list');
 
 /**
- * AUX VARIABLES
+ * Variables to keep track of selected data
  */
 var lastChannelSelected;
 var lastChannelSelectedIsOpen = false;
 var lastMessageList;
+var connectedUser;
 
 /**
  * INIT SENDBIRD
@@ -65,12 +69,6 @@ channelHandler.onUserUnmuted = function(channel, user) {};
 channelHandler.onUserBanned = function(channel, user) {};
 channelHandler.onUserUnbanned = function(channel, user) {};
 sb.addChannelHandler(UNIQUE_HANDLER_ID, channelHandler);
-
-/**
- * KEEP TRACK OF CONNECTED USER
- */
-var connectedUser;
-
 
 /**
  * CONNECT TO WEBSOCKET
@@ -237,6 +235,7 @@ function listMessagesFromOpenChannel(url) {
             prevMessageListQuery.includeReaction = true;
             prevMessageListQuery.load((messages, error) => {
                 if (error) {
+                    alert('Error listing messages!');
                     return;
                 }
                 /**
@@ -345,7 +344,7 @@ function sendFileMessage(message = '') {
     const files = document.getElementById('attachFile').files;
     const file = files[0];
     console.dir(file);
-
+    // Parmeters for your message
     const params = new sb.FileMessageParams();
     params.file = file;             // Or .fileUrl  = FILE_URL (You can also send a file message with a file URL.)
     params.fileName = file.name;
