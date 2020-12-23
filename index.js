@@ -183,7 +183,7 @@ function listMessagesFromChannel(groupUrl) {
              */
             var prevMessageListQuery = groupChannel.createPreviousMessageListQuery();
             prevMessageListQuery.limit = 100;
-            prevMessageListQuery.reverse = true;
+            prevMessageListQuery.reverse = false;
             prevMessageListQuery.includeMetaArray = true;
             prevMessageListQuery.includeReaction = true;
             prevMessageListQuery.load((messages, error) => {
@@ -448,5 +448,71 @@ function getPlainUrl(messageId) {
     const message = lastMessageList.find( item => item.messageId == messageId);    
     const plainUrl = message.url;
     console.log(plainUrl);
+}
+
+
+/**
+ * https://sendbird.com/docs/chat/v3/javascript/guides/group-channel#1-group-channel
+ */
+function createGroupChannel() {
+    /**
+     * Get input-text with the channel name
+     */
+    const groupChannelName = document.getElementById('newGroupChannelName');
+    /**
+     * Create parameters 
+     */    
+    var params = new sb.GroupChannelParams();
+    params.isPublic = true;
+    params.isEphemeral = false;
+    params.isDistinct = false;
+    params.isSuper = false;
+    params.addUserIds([USER_ID]);
+    params.name = groupChannelName.value;
+    /**
+     * Create group channel
+     */
+    sb.GroupChannel.createChannel(params, (groupChannel, error) => {
+        if (error) {
+            console.dir(error);
+        } else {
+            groupChannelName.value = '';
+            reloadLeftList();
+        }
+    });
+}
+
+/**
+ * https://sendbird.com/docs/chat/v3/javascript/guides/open-channel#2-create-a-channel
+ */
+function createNewOpenChannel() {
+    /**
+     * Get input-text with the channel name
+     */
+    const openChannelName = document.getElementById('newOpenChannelName');
+    /**
+     * Create parameters 
+     */    
+    var params = new sb.OpenChannelParams();
+    params.name = openChannelName.value;
+    params.operatorUserIds = [USER_ID];
+    /**
+     * Create channel
+     */
+    sb.OpenChannel.createChannel(params, function(openChannel, error) {
+        if (error) {
+            console.dir(error);
+        } else {
+            openChannelName.value = '';
+            reloadLeftList();
+        }
+    });
+}
+
+
+function reloadLeftList() {
+    getGroupChannels(() => {
+        getOpenChannels();
+    });
 }
 
