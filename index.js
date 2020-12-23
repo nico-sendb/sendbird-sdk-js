@@ -379,25 +379,33 @@ function askForFile() {
  * SENDS A FILE MESSAGE TO CHANNEL
  */
 function sendFileMessage(message = '') {
+    /**
+     * Get file object
+     */
     const files = document.getElementById('attachFile').files;
     const file = files[0];
+    /**
+     * Print it on the Chrome console
+     */
     console.dir(file);
-
+    /**
+     * Build parameters to send
+     */
     const params = new sb.FileMessageParams();
-    params.file = file;             // Or .fileUrl  = FILE_URL (You can also send a file message with a file URL.)
+    params.file = file;
     params.fileName = file.name;
     params.fileSize = file.size;
     params.mimeType = file.type;
-    params.pushNotificationDeliveryOption = 'default';  // Either 'default' or 'suppress'
+    params.pushNotificationDeliveryOption = 'default';
     params.message = message;
     lastChannelSelected.sendFileMessage(params, (fileMessage, error) => {
         if (error) {
             console.dir(error);
-            return;
+        } else {
+            console.log(fileMessage);
+            const inputBox = document.getElementById('newMessage');
+            inputBox.focus();    
         }
-        console.log(fileMessage);
-        const inputBox = document.getElementById('newMessage');
-        inputBox.focus();
     });
 }
 
