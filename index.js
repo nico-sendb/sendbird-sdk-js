@@ -27,7 +27,6 @@ const message_list = document.getElementById('message_list');
 var lastChannelSelected;
 var lastChannelSelectedIsOpen = false;
 var lastMessageList;
-var connectedUser;
 
 /**
  * INIT SENDBIRD
@@ -69,6 +68,12 @@ channelHandler.onUserUnmuted = function(channel, user) {};
 channelHandler.onUserBanned = function(channel, user) {};
 channelHandler.onUserUnbanned = function(channel, user) {};
 sb.addChannelHandler(UNIQUE_HANDLER_ID, channelHandler);
+
+/**
+ * KEEP TRACK OF CONNECTED USER
+ */
+var connectedUser;
+
 
 /**
  * CONNECT TO WEBSOCKET
@@ -235,7 +240,6 @@ function listMessagesFromOpenChannel(url) {
             prevMessageListQuery.includeReaction = true;
             prevMessageListQuery.load((messages, error) => {
                 if (error) {
-                    alert('Error listing messages!');
                     return;
                 }
                 /**
@@ -271,7 +275,39 @@ function emptyMessageList() {
 function paintMessagesAtTheCenter(messages) {
     const messagesDiv = document.getElementById('messages');
     for (const item of messages) {
-        const totalReactions = item.reactions.length + ' reactions.';
+
+        /**
+         * Button to show URL having access token: -> https://....?auth=XXX
+         */
+        const getPlainUrlButton = item.messageType == 'file' ? `
+        <button class="btn btn-outline-primary btn-sm mr-3" onclick="getPlainUrl('${ item.messageId }')">
+            Get Plain URL
+        </button>` : ``;
+
+        /**
+         * Show reactions and a button next to each one saying "Remove"
+         */
+        const reactions = item.reactions;
+        const totalReactions = reactions.length + ' reactions.';
+        var strRections = ``;
+        for (const r of reactions) {
+            try {
+                strRections += `${ String.fromCodePoint( r.key ) } `
+                strRections += `&nbsp;
+                <button class="btn btn-outline-primary btn-sm" onclick="deleteReaction('${ item.messageId }', '${ r.key }')">
+                    Remove
+                </button> &nbsp; `;    
+            } catch(err) {}
+        }
+
+        /**
+         * Button to add a reaction
+         */
+        const butAddReaction = `
+        <button class="btn btn-outline-primary btn-sm" onclick="addReaction('${ item.messageId }')">
+            Add reaction
+        </button>`;
+
         messagesDiv.innerHTML += `
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="row">
@@ -279,12 +315,14 @@ function paintMessagesAtTheCenter(messages) {
                         ${ item.message }
                         <div class="small text-muted">
                             ${ item.messageType } - ${ totalReactions } 
+                            <div>
+                                ${ strRections }
+                            </div>
                         </div>
                     </div>
                     <div class="col-auto">
-                        <button class="btn btn-outline-primary btn-sm" onclick="addReaction('${ item.messageId }')">
-                            Add reaction
-                        </button>
+                        ${ getPlainUrlButton }
+                        ${ butAddReaction }
                     </div>
                 </div>
             </a>
@@ -344,7 +382,7 @@ function sendFileMessage(message = '') {
     const files = document.getElementById('attachFile').files;
     const file = files[0];
     console.dir(file);
-    // Parmeters for your message
+
     const params = new sb.FileMessageParams();
     params.file = file;             // Or .fileUrl  = FILE_URL (You can also send a file message with a file URL.)
     params.fileName = file.name;
@@ -371,14 +409,44 @@ function addReaction(messageId) {
         alert('Please select a channel first');
         return;
     }
-    const emojiKey = "smile";
+    const emojiKey = '' + "😃".codePointAt(0);
     const message = lastMessageList.find( item => item.messageId == messageId);
     lastChannelSelected.addReaction(message, emojiKey, (reactionEvent, error) => {
         if (!error) {
             message.applyReactionEvent(reactionEvent);
-            alert('Reaction added');
+            alert('Reaction added. Refresh to see it here.');
         } else {
             console.dir(error);
         }
     });
 }
+
+function deleteReaction(messageId, emojiKey = '😃') {
+    if (!lastChannelSelected || !lastMessageList) {
+        alert('Please select a channel first');
+        return;
+    }
+    const message = lastMessageList.find( item => item.messageId == messageId);
+    lastChannelSelected.deleteReaction(message, emojiKey, (reactionEvent, error) => {
+        if (!error) {
+            alert('Reaction removed. Refresh to see it dissapear');
+        } else {
+            console.dir(error);
+        }
+    });
+}
+
+/**
+ * Shows on console the URL with an access token
+ * https://...?auth=XXX
+ */
+function getPlainUrl(messageId) {
+    if (!lastChannelSelected || !lastMessageList) {
+        alert('Please select a channel first');
+        return;
+    }
+    const message = lastMessageList.find( item => item.messageId == messageId);    
+    const plainUrl = message.url;
+    console.log(plainUrl);
+}
+
