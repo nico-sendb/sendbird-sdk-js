@@ -308,6 +308,14 @@ function paintMessagesAtTheCenter(messages) {
             Add reaction
         </button>`;
 
+        /**
+         * Button to get previous messages by ID
+         */
+        const butPrevMessagesById = lastChannelSelectedIsOpen ? '' : `
+        <button class="btn btn-outline-primary btn-sm" onclick="getPreviousMessagesByIDGroupChannel('${ item.messageId }')">
+            Get Prev Messages by ID
+        </button>`;
+
         messagesDiv.innerHTML += `
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="row">
@@ -323,6 +331,7 @@ function paintMessagesAtTheCenter(messages) {
                     <div class="col-auto">
                         ${ getPlainUrlButton }
                         ${ butAddReaction }
+                        ${ butPrevMessagesById }
                     </div>
                 </div>
             </a>
@@ -522,5 +531,24 @@ function reloadLeftList() {
     getGroupChannels(() => {
         getOpenChannels();
     });
+}
+
+function getPreviousMessagesByIDGroupChannel(messageId) {
+    const prevLimit = 50;
+    lastChannelSelected.getPreviousMessagesByID(
+        parseInt(messageId),
+        false,
+        prevLimit,
+        false,
+        '',
+        '',
+        (prevMessages) => {
+            for (let i = 0; i < prevMessages.length; i++) {
+                console.log('Previous Messages By ID: ');
+                console.dir( prevMessages[i] );
+                console.log('--------------');
+            }
+        }
+    )
 }
 
