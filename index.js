@@ -5,6 +5,7 @@
 const APP_ID = 'WRITE HERE YOUR APP ID FROM SENDBIRD';
 const USER_ID = 'ENTER ONE OF YOUR USER ID HERE';
 const ACCESS_TOKEN = null; // Use this if your user has Access Token (check this from your Sendbird Dashboard)
+const API_TOKEN = 'WRITE-YOUR-API-TOKEN-HERE';
 
 /**
  * Unique hanlder for listener (can be any string you like)
@@ -285,6 +286,14 @@ function paintMessagesAtTheCenter(messages) {
         </button>` : ``;
 
         /**
+         * Button to show get the file using Platform API
+         */
+        const downloadFileButton = item.messageType == 'file' ? `
+        <button class="btn btn-outline-primary btn-sm mr-3" onclick="downloadFile('${ item.plainUrl }', '${ item.type }', '${ item.name }')">
+            Download File
+        </button>` : ``;
+
+        /**
          * Show reactions and a button next to each one saying "Remove"
          */
         const reactions = item.reactions;
@@ -330,10 +339,12 @@ function paintMessagesAtTheCenter(messages) {
                     </div>
                     <div class="col-auto">
                         ${ getPlainUrlButton }
+                        ${ downloadFileButton }
                         ${ butAddReaction }
                         ${ butPrevMessagesById }
                     </div>
                 </div>
+                <div id="file-${ item.plainUrl }"></div>
             </a>
         `;
     }
@@ -467,6 +478,51 @@ function getPlainUrl(messageId) {
     console.log(plainUrl);
 }
 
+/**
+ * Using PlainUrl download this file
+ */
+function downloadFile(plainUrl, fileType, fileName) {
+    var url = plainUrl;
+    var headers = new Headers({
+        'Api-Token': API_TOKEN
+    });
+    var options = {
+        method: 'GET',
+        headers: headers,
+        mode: 'cors',
+        cache: 'default'
+    };
+    var request = new Request(url);    
+    fetch(request, options).then((response) => {
+        if (fileType.substring(0, 5) == 'image') {
+            /**
+             * If downloading image files
+             */
+            response.arrayBuffer().then((buffer) => {
+                var base64Flag = 'data:' + fileType + ';base64,';
+                var fileStr  = arrayBufferToBase64(buffer);
+                document.getElementById('file-' + plainUrl).innerHTML = `<img src="${ base64Flag + fileStr }" style="height:100px;" />` ;
+            });
+        } else {
+            /**
+             * If you are downloading any other format
+             * Let's say PDF or ZIP
+             */
+            const url = response.url;
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.click();
+        }
+    });    
+}
+
+function arrayBufferToBase64(buffer) {
+    var binary = '';
+    var bytes = [].slice.call(new Uint8Array(buffer));
+    bytes.forEach((b) => binary += String.fromCharCode(b));
+    return window.btoa(binary);
+}
 
 /**
  * https://sendbird.com/docs/chat/v3/javascript/guides/group-channel#1-group-channel
