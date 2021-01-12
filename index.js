@@ -353,7 +353,7 @@ function paintMessagesAtTheCenter(messages) {
 /**
  * SENDS A MESSAGE TO GROUP OR OPEN CHANNEL
  */
-function sendMessage() {
+function sendMessage(translate = false) {
     if (!lastChannelSelected) {
         alert('Please select a channel first');
         return;
@@ -370,6 +370,9 @@ function sendMessage() {
     params.message = inputBox.value;
     params.pushNotificationDeliveryOption = 'default';
     params.mentionType = 'users';
+    if (translate) {
+        params.translationTargetLanguages = ['vi'];   // Spanish
+    }
     /**
      * Send message
      */
@@ -494,6 +497,7 @@ function downloadFile(plainUrl, fileType, fileName) {
     };
     var request = new Request(url);    
     fetch(request, options).then((response) => {
+        console.dir(response);
         if (fileType.substring(0, 5) == 'image') {
             /**
              * If downloading image files
@@ -607,4 +611,23 @@ function getPreviousMessagesByIDGroupChannel(messageId) {
         }
     )
 }
+
+
+function inviteByUserId() {
+    if (!lastChannelSelectedIsOpen) {
+        const userId = prompt("Enter user id");
+        if (!userId) {
+            return;
+        }
+        var userIds = [userId];
+        lastChannelSelected.inviteWithUserIds(userIds, function(response, error) {
+            if (error) {
+                console.dir(error)
+            }
+            listMessagesFromChannel(lastChannelSelected.url);
+        });    
+    }
+}
+
+
 
