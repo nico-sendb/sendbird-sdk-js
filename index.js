@@ -39,35 +39,140 @@ var sb = new SendBird({appId: APP_ID});
  */
 var channelHandler = new sb.ChannelHandler();
 channelHandler.onMessageReceived = function(channel, message) {
-    console.log('Message received');
+    consolelog('onMessageReceived');
+    consoledir(channel);
+    consoledir(message);
 };
-channelHandler.onMessageUpdated = function(channel, message) {};
-channelHandler.onMessageDeleted = function(channel, messageId) {};
-channelHandler.onMentionReceived = function(channel, message) {};
-channelHandler.onChannelChanged = function(channel) {};
-channelHandler.onChannelDeleted = function(channelUrl, channelType) {};
-channelHandler.onChannelFrozen = function(channel) {};
-channelHandler.onChannelUnfrozen = function(channel) {};
-channelHandler.onMetaDataCreated = function(channel, metaData) {};
-channelHandler.onMetaDataUpdated = function(channel, metaData) {};
-channelHandler.onMetaDataDeleted = function(channel, metaDataKeys) {};
-channelHandler.onMetaCountersCreated = function(channel, metaCounter) {};
-channelHandler.onMetaCountersUpdated = function(channel, metaCounter) {};
-channelHandler.onMetaCountersDeleted = function(channel, metaCounterKeys) {};
-channelHandler.onChannelHidden = function(groupChannel) {};
-channelHandler.onUserReceivedInvitation = function(groupChannel, inviter, invitees) {};
-channelHandler.onUserDeclinedInvitation = function(groupChannel, inviter, invitee) {};
-channelHandler.onUserJoined = function(groupChannel, user) {};
-channelHandler.onUserLeft = function(groupChannel, user) {};
-channelHandler.onDeliveryReceiptUpdated = function(groupChannel) {};
-channelHandler.onReadReceiptUpdated = function(groupChannel) {};
-channelHandler.onTypingStatusUpdated = function(groupChannel) {};
-channelHandler.onUserEntered = function(openChannel, user) {};
-channelHandler.onUserExited = function(openChannel, user) {};
-channelHandler.onUserMuted = function(channel, user) {};
-channelHandler.onUserUnmuted = function(channel, user) {};
-channelHandler.onUserBanned = function(channel, user) {};
-channelHandler.onUserUnbanned = function(channel, user) {};
+channelHandler.onMessageUpdated = function(channel, message) {
+    consolelog('onMessageUpdated:'); 
+    consoledir(channel);
+    consoledir(message);
+};
+channelHandler.onMessageDeleted = function(channel, messageId) {
+    consolelog('onMessageDeleted:'); 
+    consoledir(channel);
+    consolelog(messageId);
+};
+channelHandler.onMentionReceived = function(channel, message) {
+    consolelog('onMentionReceived:'); 
+    consoledir(channel);
+    consoledir(message);
+};
+channelHandler.onChannelChanged = function(channel) {
+    consolelog('onChannelChanged:'); 
+    consoledir(channel);
+};
+channelHandler.onChannelDeleted = function(channelUrl, channelType) {
+    consolelog('onChannelDeleted:'); 
+    consolelog(channelUrl);
+    consolelog(channelType);
+};
+channelHandler.onChannelFrozen = function(channel) {
+    consolelog('onChannelFrozen:'); 
+    consoledir(channel);
+};
+channelHandler.onChannelUnfrozen = function(channel) {
+    consolelog('onChannelUnfrozen:'); 
+    consoledir(channel);
+};
+channelHandler.onMetaDataCreated = function(channel, metaData) {
+    consolelog('onMetaDataCreated:'); 
+    consoledir(channel);
+    consoledir(metaData);
+};
+channelHandler.onMetaDataUpdated = function(channel, metaData) {
+    consolelog('onMetaDataUpdated:'); 
+    consoledir(channel);
+    consoledir(metaData);
+};
+channelHandler.onMetaDataDeleted = function(channel, metaDataKeys) {
+    consolelog('onMetaDataDeleted:'); 
+    consoledir(channel);
+    consoledir(metaDataKeys);
+};
+channelHandler.onMetaCountersCreated = function(channel, metaCounter) {
+    consolelog('onMetaCountersCreated:'); 
+    consoledir(channel);
+    consoledir(metaCounter);
+};
+channelHandler.onMetaCountersUpdated = function(channel, metaCounter) {
+    consolelog('onMetaCountersUpdated:'); 
+    consoledir(channel);
+    consoledir(metaCounter);
+};
+channelHandler.onMetaCountersDeleted = function(channel, metaCounterKeys) {
+    consolelog('onMetaCountersDeleted:'); 
+    consoledir(channel);
+    consoledir(metaCounterKeys);
+};
+channelHandler.onChannelHidden = function(groupChannel) {
+    consolelog('onChannelHidden:'); 
+    consoledir(groupChannel);
+};
+channelHandler.onUserReceivedInvitation = function(groupChannel, inviter, invitees) {
+    consolelog('onUserReceivedInvitation:'); 
+    consoledir(groupChannel);
+    consoledir(inviter);
+    consoledir(invitees);
+};
+channelHandler.onUserDeclinedInvitation = function(groupChannel, inviter, invitee) {
+    consolelog('onUserDeclinedInvitation:'); 
+    consoledir(groupChannel);
+    consoledir(inviter);
+    consoledir(invitee);
+};
+channelHandler.onUserJoined = function(groupChannel, user) {
+    consolelog('onUserJoined:'); 
+    consoledir(groupChannel); 
+    consoledir(user);
+};
+channelHandler.onUserLeft = function(groupChannel, user) {
+    consolelog('onUserLeft:'); 
+    consoledir(groupChannel);
+    consoledir(user);
+};
+channelHandler.onDeliveryReceiptUpdated = function(groupChannel) {
+    consolelog('onDeliveryReceiptUpdated:'); 
+    consoledir(groupChannel);
+};
+channelHandler.onReadReceiptUpdated = function(groupChannel) {
+    consolelog('onReadReceiptUpdated:'); 
+    consoledir(groupChannel);
+};
+channelHandler.onTypingStatusUpdated = function(groupChannel) {
+    consolelog('onTypingStatusUpdated:'); 
+    consoledir(groupChannel);
+};
+channelHandler.onUserEntered = function(openChannel, user) {
+    consolelog('onUserEntered:'); 
+    consoledir(openChannel);
+    consoledir(user);
+};
+channelHandler.onUserExited = function(openChannel, user) {
+    consolelog('onUserExited:'); 
+    consoledir(openChannel);
+    consoledir(user);
+};
+channelHandler.onUserMuted = function(channel, user) {
+    consolelog('onUserMuted:'); 
+    consoledir(channel);
+    consoledir(user);
+};
+channelHandler.onUserUnmuted = function(channel, user) {
+    consolelog('onUserUnmuted:'); 
+    consoledir(channel);
+    consoledir(user);
+};
+channelHandler.onUserBanned = function(channel, user) {
+    consolelog('onUserBanned:'); 
+    consoledir(channel);
+    consoledir(user);
+};
+channelHandler.onUserUnbanned = function(channel, user) {
+    consolelog('onUserUnbanned:'); 
+    consoledir(channel);
+    consoledir(user);
+};
 sb.addChannelHandler(UNIQUE_HANDLER_ID, channelHandler);
 
 /**
@@ -77,18 +182,51 @@ var connectedUser;
 
 
 /**
+ * START HERE - DEFAULT CONNECTION WITH GIVEN USER
+ */
+connectToSocket();
+
+
+
+/**
  * CONNECT TO WEBSOCKET
  */
-sb.connect(USER_ID, ACCESS_TOKEN, (user, error) => {
-    connectedUser = user;
-    if (error) {
+function connectToSocket() {
+    sb.connect(USER_ID, ACCESS_TOKEN, (user, error) => {
+        console.log('Connected to Socket');
+        consoledir(user);
+        /**
+         * Assign globally
+         */
+        connectedUser = user;
+        /**
+         * Show error or read channels
+         */
+        if (error) {
+            consoledir(error);
+            return;
+        } else {
+            getGroupChannels(() => {
+                getOpenChannels();
+            });
+        }
+    });    
+}
+
+/**
+ * READ A DIFERENT USER ID AND RECONNECT
+ */
+function connectWithDifferentUser() {
+    var newUserId = document.getElementById('newUserId').value;
+    if (!newUserId) {
         return;
-    } else {
-        getGroupChannels(() => {
-            getOpenChannels();
-        });
     }
-});
+    USER_ID = newUserId;
+    sb.disconnect();
+    setTimeout(() => {
+        connectToSocket();
+    })
+}
 
 /**
  * LIST ALL GROUP CHANNELS
@@ -101,12 +239,16 @@ function getGroupChannels(callback) {
     channelListQuery.includeMetaArray = true;
     if (channelListQuery.hasNext) {
         channelListQuery.next((groupChannels, error) => {
-            console.dir(groupChannels);
+            consolelog('Group Channels:');
+            consoledir(groupChannels);
             if (error) {
+                consolelog('Error getting Group Channels');
+                consoledir(error);
                 return;
             } else {
                 clearLeftColumen();
                 for (const item of groupChannels) {
+                    consolelog('UNREAD MESSAGE COUNT FOR ' + item.name + '(' + item.url + ') : ' + item.unreadMessageCount);
                     drawGroupChannel(item);
                 }
                 callback();
@@ -126,6 +268,8 @@ function getOpenChannels() {
     if (channelListQuery.hasNext) {
         channelListQuery.next((channels, error) => {
             if (error) {
+                consolelog('Error getting Open Channels');
+                consoledir(error);
                 return;
             } else {
                 for (const item of channels) {
@@ -148,8 +292,9 @@ function clearLeftColumen() {
  */
 function drawGroupChannel(channel) {
     document.getElementById('channel_list').innerHTML += `
-        <a href="#" class="list-group-item list-group-item-action" id="channel-${ channel.url }" onclick="listMessagesFromChannel('${ channel.url }')">
-            ${ channel.name }
+        <a href="#" class="list-group-item list-group-item-action overflow-hidden" id="channel-${ channel.url }" onclick="listMessagesFromChannel('${ channel.url }')">
+            ${ channel.name } <br>
+            <small>${ channel.url }</small>
         </a>
     `;
 }
@@ -171,7 +316,8 @@ function drawOpenChannel(channel) {
 function listMessagesFromChannel(groupUrl) {
     sb.GroupChannel.getChannel(groupUrl, (groupChannel, error) => {
         if (error) {
-            console.log(error);
+            consolelog('Error listing group channel messages:');
+            consolelog(error);
             return;
         } else {
             /**
@@ -188,10 +334,13 @@ function listMessagesFromChannel(groupUrl) {
             prevMessageListQuery.includeMetaArray = true;
             prevMessageListQuery.includeReaction = true;
             prevMessageListQuery.load((messages, error) => {
-                console.log('MESSAGES'); console.log(messages);
                 if (error) {
+                    consolelog('Error listing messages for group channel:');
+                    consoledir(error);
                     return;
                 }
+                consolelog('Messages:'); 
+                consoledir(messages);
                 /**
                  * Set global variable
                  */
@@ -215,7 +364,8 @@ function listMessagesFromChannel(groupUrl) {
 function listMessagesFromOpenChannel(url) {
     sb.OpenChannel.getChannel(url, (channel, error) => {
         if (error) {
-            console.log(error);
+            consolelog('Error getting messages for Open Channel:'); 
+            consolelog(error);
             return;
         }
         /**
@@ -229,6 +379,7 @@ function listMessagesFromOpenChannel(url) {
         channel.enter((response, error) => {
             if (error) {
                 alert('Error entering open channel!');
+                consoledir(error);
                 return;
             }
             /**
@@ -241,6 +392,8 @@ function listMessagesFromOpenChannel(url) {
             prevMessageListQuery.includeReaction = true;
             prevMessageListQuery.load((messages, error) => {
                 if (error) {
+                    consolelog('Errpr getting messages:');
+                    consoledir(error);
                     return;
                 }
                 /**
@@ -264,10 +417,7 @@ function listMessagesFromOpenChannel(url) {
  * CLEARS THE AREA WHERE MESSAGES ARE SHOWN
  */
 function emptyMessageList() {
-    message_list.innerHTML = `
-        <div class="list-group" id="messages">
-        </div>
-    `;
+    message_list.innerHTML = `<div class="list-group" id="messages"></div>`;
 }
 
 /**
@@ -276,7 +426,11 @@ function emptyMessageList() {
 function paintMessagesAtTheCenter(messages) {
     const messagesDiv = document.getElementById('messages');
     for (const item of messages) {
-
+        consoledir(item);
+        var userId = '';
+        if (item.sender) {
+            userId = item.sender.userId;
+        }
         /**
          * Button to show URL having access token: -> https://....?auth=XXX
          */
@@ -284,7 +438,6 @@ function paintMessagesAtTheCenter(messages) {
         <button class="btn btn-outline-primary btn-sm mr-3" onclick="getPlainUrl('${ item.messageId }')">
             Get Plain URL
         </button>` : ``;
-
         /**
          * Button to show get the file using Platform API
          */
@@ -292,7 +445,6 @@ function paintMessagesAtTheCenter(messages) {
         <button class="btn btn-outline-primary btn-sm mr-3" onclick="downloadFile('${ item.plainUrl }', '${ item.type }', '${ item.name }')">
             Download File
         </button>` : ``;
-
         /**
          * Show reactions and a button next to each one saying "Remove"
          */
@@ -308,7 +460,6 @@ function paintMessagesAtTheCenter(messages) {
                 </button> &nbsp; `;    
             } catch(err) {}
         }
-
         /**
          * Button to add a reaction
          */
@@ -316,7 +467,6 @@ function paintMessagesAtTheCenter(messages) {
         <button class="btn btn-outline-primary btn-sm" onclick="addReaction('${ item.messageId }')">
             Add reaction
         </button>`;
-
         /**
          * Button to get previous messages by ID
          */
@@ -324,14 +474,28 @@ function paintMessagesAtTheCenter(messages) {
         <button class="btn btn-outline-primary btn-sm" onclick="getPreviousMessagesByIDGroupChannel('${ item.messageId }')">
             Get Prev Messages by ID
         </button>`;
-
+        /**
+         * Button for replying
+         */
+        const replyMessage = `<div class="mt-2 mb-2 row">
+            <div class="col">
+                <input type="text" class="form-control" id="replyText-${ item.messageId }" placeholder="Type your response..." />
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary btn-sm" onclick="replyTo('${ item.messageId }')">Reply</button>
+            </div>
+        </div>
+        `;
+        /**
+         * Build a row of data
+         */
         messagesDiv.innerHTML += `
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col">
                         ${ item.message }
                         <div class="small text-muted">
-                            ${ item.messageType } - ${ totalReactions } 
+                        ${ userId } - ${ item.messageType } - ${ totalReactions } 
                             <div>
                                 ${ strRections }
                             </div>
@@ -345,10 +509,55 @@ function paintMessagesAtTheCenter(messages) {
                     </div>
                 </div>
                 <div id="file-${ item.plainUrl }"></div>
+                ${ replyMessage }
             </a>
         `;
     }
 }
+
+/**
+ * Reply to a message
+ */
+function replyTo(messageId) {
+    if (!lastChannelSelected) {
+        alert('Please select a channel first');
+        return;
+    }
+    const inputBox = document.getElementById('replyText-' + messageId);
+    if (!inputBox.value) {
+        return;
+    }
+    /**
+     * Set message parameters
+     */
+    const params = new sb.UserMessageParams();
+    params.message = inputBox.value;
+    params.pushNotificationDeliveryOption = 'default';
+    params.mentionType = 'users';
+    /**
+     * RESPOND TO MESSAGE
+     */
+    params.parentMessageId = messageId;
+    /**
+     * Send message
+     */
+    lastChannelSelected.sendUserMessage(params, (message, error) => {
+        if (error) {
+            consolelog('Error eplying to message:');
+            consoledir(error);
+            return;
+        }
+        if (lastChannelSelectedIsOpen) {
+            listMessagesFromOpenChannel(lastChannelSelected.url);
+        } else {
+            listMessagesFromChannel(lastChannelSelected.url);
+        }
+        inputBox.value = '';
+        inputBox.focus();
+    });
+}
+
+
 
 /**
  * SENDS A MESSAGE TO GROUP OR OPEN CHANNEL
@@ -360,7 +569,7 @@ function sendMessage(translate = false) {
     }
     const inputBox = document.getElementById('newMessage');
     if (!inputBox.value) {
-        console.log('No message to send');
+        consolelog('No message to send');
         return;
     }
     /**
@@ -371,14 +580,15 @@ function sendMessage(translate = false) {
     params.pushNotificationDeliveryOption = 'default';
     params.mentionType = 'users';
     if (translate) {
-        params.translationTargetLanguages = ['vi'];   // Spanish
+        params.translationTargetLanguages = ['vi'];   // << Set desired target language code
     }
     /**
      * Send message
      */
     lastChannelSelected.sendUserMessage(params, (message, error) => {
         if (error) {
-            console.dir(error);
+            consolelog('Error sending message:');
+            consoledir(error);
             return;
         }
         if (lastChannelSelectedIsOpen) {
@@ -410,7 +620,7 @@ function sendFileMessage(message = '') {
     /**
      * Print it on the Chrome console
      */
-    console.dir(file);
+    consoledir(file);
     /**
      * Build parameters to send
      */
@@ -423,9 +633,11 @@ function sendFileMessage(message = '') {
     params.message = message;
     lastChannelSelected.sendFileMessage(params, (fileMessage, error) => {
         if (error) {
-            console.dir(error);
+            consolelog('Error sending file message:');
+            consoledir(error);
         } else {
-            console.log(fileMessage);
+            consolelog('Response:')
+            consoledir(fileMessage);
             const inputBox = document.getElementById('newMessage');
             inputBox.focus();    
         }
@@ -440,18 +652,22 @@ function addReaction(messageId) {
         alert('Please select a channel first');
         return;
     }
-    const emojiKey = '' + "😃".codePointAt(0);
+    const emojiKey = '' + "😃".codePointAt(0); // << A bug was discovered thanks to this one here
     const message = lastMessageList.find( item => item.messageId == messageId);
     lastChannelSelected.addReaction(message, emojiKey, (reactionEvent, error) => {
         if (!error) {
             message.applyReactionEvent(reactionEvent);
             alert('Reaction added. Refresh to see it here.');
         } else {
-            console.dir(error);
+            consolelog('Error sending reaction:');
+            consoledir(error);
         }
     });
 }
 
+/**
+ * REMOVES REACTION FROM MESSAGE
+ */
 function deleteReaction(messageId, emojiKey = '😃') {
     if (!lastChannelSelected || !lastMessageList) {
         alert('Please select a channel first');
@@ -462,7 +678,8 @@ function deleteReaction(messageId, emojiKey = '😃') {
         if (!error) {
             alert('Reaction removed. Refresh to see it dissapear');
         } else {
-            console.dir(error);
+            consolelog('Error removing reaction:');
+            consoledir(error);
         }
     });
 }
@@ -478,7 +695,7 @@ function getPlainUrl(messageId) {
     }
     const message = lastMessageList.find( item => item.messageId == messageId);    
     const plainUrl = message.url;
-    console.log(plainUrl);
+    consolelog(plainUrl);
 }
 
 /**
@@ -497,7 +714,7 @@ function downloadFile(plainUrl, fileType, fileName) {
     };
     var request = new Request(url);    
     fetch(request, options).then((response) => {
-        console.dir(response);
+        consoledir(response);
         if (fileType.substring(0, 5) == 'image') {
             /**
              * If downloading image files
@@ -521,6 +738,9 @@ function downloadFile(plainUrl, fileType, fileName) {
     });    
 }
 
+/**
+ * Helper function
+ */
 function arrayBufferToBase64(buffer) {
     var binary = '';
     var bytes = [].slice.call(new Uint8Array(buffer));
@@ -531,7 +751,7 @@ function arrayBufferToBase64(buffer) {
 /**
  * https://sendbird.com/docs/chat/v3/javascript/guides/group-channel#1-group-channel
  */
-function createGroupChannel() {
+function createGroupChannel(userIdToInvite = null) {
     /**
      * Get input-text with the channel name
      */
@@ -544,14 +764,19 @@ function createGroupChannel() {
     params.isEphemeral = false;
     params.isDistinct = false;
     params.isSuper = false;
-    params.addUserIds([USER_ID]);
+    var userIds = [USER_ID];
+    if (userIdToInvite) {
+        userIds.push(userIdToInvite);
+    }
+    params.addUserIds( userIds );
     params.name = groupChannelName.value;
     /**
      * Create group channel
      */
     sb.GroupChannel.createChannel(params, (groupChannel, error) => {
         if (error) {
-            console.dir(error);
+            consolelog('Error creating group channel:');
+            consoledir(error);
         } else {
             groupChannelName.value = '';
             reloadLeftList();
@@ -578,7 +803,8 @@ function createNewOpenChannel() {
      */
     sb.OpenChannel.createChannel(params, function(openChannel, error) {
         if (error) {
-            console.dir(error);
+            consolelog('Error creating open channel:');
+            consoledir(error);
         } else {
             openChannelName.value = '';
             reloadLeftList();
@@ -586,13 +812,15 @@ function createNewOpenChannel() {
     });
 }
 
-
 function reloadLeftList() {
     getGroupChannels(() => {
         getOpenChannels();
     });
 }
 
+/**
+ * GET PREVIOUS MESSAGES BY ID IN GROUP CHANNEL
+ */
 function getPreviousMessagesByIDGroupChannel(messageId) {
     const prevLimit = 50;
     lastChannelSelected.getPreviousMessagesByID(
@@ -604,15 +832,17 @@ function getPreviousMessagesByIDGroupChannel(messageId) {
         '',
         (prevMessages) => {
             for (let i = 0; i < prevMessages.length; i++) {
-                console.log('Previous Messages By ID: ');
-                console.dir( prevMessages[i] );
-                console.log('--------------');
+                consolelog('Previous Messages By ID: ');
+                consoledir( prevMessages[i] );
+                consolelog('--------------');
             }
         }
     )
 }
 
-
+/**
+ * INVITE USER
+ */
 function inviteByUserId() {
     if (!lastChannelSelectedIsOpen) {
         const userId = prompt("Enter user id");
@@ -622,11 +852,32 @@ function inviteByUserId() {
         var userIds = [userId];
         lastChannelSelected.inviteWithUserIds(userIds, function(response, error) {
             if (error) {
-                console.dir(error)
+                consolelog('Error inviting user:');
+                consoledir(error)
             }
             listMessagesFromChannel(lastChannelSelected.url);
         });    
     }
+}
+
+/**
+ * CREATE GROUP CHANNEL AND INVITE USER BY ID
+ */
+function createGroupChannelAndInvite() {
+    const userIdToInvite = document.getElementById('userIdToInvite').value;
+    if (!userIdToInvite) {
+        return;
+    }
+    createGroupChannel(userIdToInvite);
+}
+
+
+function consolelog(text) {
+    console.log(text);
+}
+
+function consoledir(text) {
+    console.dir(text);
 }
 
 
